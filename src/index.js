@@ -30,7 +30,7 @@ class Book {
 
 class Books {
     constructor() {
-        this.bookArr = [new Book("Game Of Thrones", "Someone", 300, false)]; 
+        this.bookArr = [new Book("Game Of Thrones", "Someone", 300, false), new Book("Something", "Someone", 300, false)]; 
     }
     addBookToArray(name) {
         let book = new Book(name);
@@ -45,7 +45,6 @@ class Books {
 let newBook = new Books();
 let bookArray = newBook.allBooks;
 
-bookArray.forEach(renderBooks);
 
 function renderBooks(book) {
     const newBookDiv = document.createElement("div");
@@ -67,8 +66,14 @@ function addBook() {
     console.log("click");
 }
 
-function submitBook(e) {
+function submitBook() {
     const title = libraryDOM.titleInput.value;
-    const author = libraryDOM.authorInput.value;
-    const pages = libraryDOM.pagesInput.value;
+    // const author = libraryDOM.authorInput.value;
+    // const pages = libraryDOM.pagesInput.value;
+    let pushBooks = newBook.addBookToArray(title);
+    renderBooks(pushBooks);
+    console.log(bookArray);
+    e.preventDefault();
 }
+
+bookArray.forEach(renderBooks);
