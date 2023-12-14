@@ -20,11 +20,17 @@ class Book {
     get nameOfBook() {
         return this.name;
     }
+    get authorOfBook() {
+        return this.author;
+    }
+    get numOfPages() {
+        return this.pages;
+    }
 }
 
 class Books {
     constructor() {
-        this.bookArr = [new Book("Game Of Thrones")]; 
+        this.bookArr = [new Book("Game Of Thrones", "Someone", 300, false)]; 
     }
     addBookToArray(name) {
         let book = new Book(name);
@@ -42,9 +48,27 @@ let bookArray = newBook.allBooks;
 bookArray.forEach(renderBooks);
 
 function renderBooks(book) {
-
+    const newBookDiv = document.createElement("div");
+    const dltBtn = document.createElement("button");
+    const readBtn= document.createElement("button");
+    newBookDiv.textContent = book.nameOfBook + " " + book.authorOfBook + " " + book.numOfPages;
+    newBookDiv.classList.add("book");
+    dltBtn.textContent = "Delete";
+    readBtn.textContent = "Read";
+    newBookDiv.append(dltBtn, readBtn);
+    libraryDOM.bookDisplay.append(newBookDiv);
 }
 
 libraryDOM.addBookBtn.addEventListener("click", addBook);
+libraryDOM.subBtn.addEventListener("click", submitBook);
 
-function addBook() {}
+function addBook() {
+    libraryDOM.bookForm.style.visibility = "visible";
+    console.log("click");
+}
+
+function submitBook(e) {
+    const title = libraryDOM.titleInput.value;
+    const author = libraryDOM.authorInput.value;
+    const pages = libraryDOM.pagesInput.value;
+}

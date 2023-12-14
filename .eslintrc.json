@@ -13,6 +13,7 @@
         "no-restricted-modules":"off",
         "semi": ["error", "always"],
         "quotes": ["error", "double"],
-        "no-undef": "off"
+        "no-undef": "off",
+        "no-unused-vars": "off"
     }
 }
