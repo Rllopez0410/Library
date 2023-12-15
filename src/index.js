@@ -30,10 +30,10 @@ class Book {
 
 class Books {
     constructor() {
-        this.bookArr = [new Book("Game Of Thrones", "Someone", 300, false), new Book("Something", "Someone", 300, false)]; 
+        this.bookArr = []; 
     }
-    addBookToArray(name) {
-        let book = new Book(name);
+    addBookToArray(name, author, pages) {
+        let book = new Book(name, author, pages);
         this.bookArr.push(book);
         return book;
     }
@@ -45,7 +45,6 @@ class Books {
 let newBook = new Books();
 let bookArray = newBook.allBooks;
 
-
 function renderBooks(book) {
     const newBookDiv = document.createElement("div");
     const dltBtn = document.createElement("button");
@@ -56,6 +55,14 @@ function renderBooks(book) {
     readBtn.textContent = "Read";
     newBookDiv.append(dltBtn, readBtn);
     libraryDOM.bookDisplay.append(newBookDiv);
+    dltBtn.addEventListener("click", (i) => {
+        if(bookArray[i] == dltBtn[i]) {
+            bookArray.splice(bookArray.indexOf(book), 1);
+            newBookDiv.remove();
+            dltBtn.remove();
+            console.log(bookArray);
+        }
+    });
 }
 
 libraryDOM.addBookBtn.addEventListener("click", addBook);
@@ -66,11 +73,12 @@ function addBook() {
     console.log("click");
 }
 
-function submitBook() {
+function submitBook(e) {
     const title = libraryDOM.titleInput.value;
-    // const author = libraryDOM.authorInput.value;
-    // const pages = libraryDOM.pagesInput.value;
-    let pushBooks = newBook.addBookToArray(title);
+    const author = libraryDOM.authorInput.value;
+    const pages = libraryDOM.pagesInput.value;
+    const pushBooks = newBook.addBookToArray(title, author, pages);
+    libraryDOM.bookForm.style.visibility = "hidden";
     renderBooks(pushBooks);
     console.log(bookArray);
     e.preventDefault();
