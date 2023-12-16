@@ -48,7 +48,7 @@ let bookArray = newBook.allBooks;
 function renderBooks(book) {
     const newBookDiv = document.createElement("div");
     const dltBtn = document.createElement("button");
-    const readBtn= document.createElement("button");
+    const readBtn = document.createElement("button");
     newBookDiv.textContent = book.nameOfBook + " " + book.authorOfBook + " " + book.numOfPages;
     newBookDiv.classList.add("book");
     dltBtn.textContent = "Delete";
@@ -56,10 +56,16 @@ function renderBooks(book) {
     newBookDiv.append(dltBtn, readBtn);
     libraryDOM.bookDisplay.append(newBookDiv);
     dltBtn.addEventListener("click", (i) => {
-        if(bookArray[i] == dltBtn[i]) {
+        if (bookArray[i] == dltBtn[i]) {
             bookArray.splice(bookArray.indexOf(book), 1);
             newBookDiv.remove();
             dltBtn.remove();
+            console.log(bookArray);
+        }
+    });
+    readBtn.addEventListener("click", (i) => {
+        if (bookArray[i] == readBtn[i]) {
+            bookArray.slice(bookArray.indexOf(book.read = true));
             console.log(bookArray);
         }
     });
