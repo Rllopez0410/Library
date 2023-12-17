@@ -9,16 +9,17 @@
 <body>
      <form id="form" action="#">
         <label for="title">Title</label>
-        <input type="text" name="title" id="title" value="">
+        <input type="text" name="title" id="title" value="" required>
+        <span id="title-error">Please fill in the above field</span>
         <label for="author">Author</label>
-        <input type="text" name="author" id="author">
+        <input type="text" name="author" id="author" required>
+        <span id="author-error">Please fill in the above field</span>
         <label for="pages">Number of Pages</label>
-        <input type="number" name="pages" id="pages">
+        <input type="number" name="pages" id="pages" required>
+        <span id="pages-error">Please fill in the above field</span>
         <p>Did you read this book?</p>
         <label for="did-read">Read</label>
         <input type="radio" name="read" id="did-read" value="yes">
-        <label for="did-not-read">Didn't Read</label>
-        <input type="radio" name="read" id="did-not-read" value="no">
         <button id="submit-btn">Submit</button>
 
     </form>

@@ -4,8 +4,11 @@ const libraryDOM = {
     bookDisplay: document.getElementById("book-display"),
     addBookBtn: document.getElementById("new-book"),
     titleInput: document.getElementById("title"),
+    titleError: document.getElementById("title-error"),
     authorInput: document.getElementById("author"),
+    authorError: document.getElementById("author-error"),
     pagesInput: document.getElementById("pages"),
+    pagesError: document.getElementById("pages-error"),
     bookForm: document.getElementById("form"),
     subBtn: document.getElementById("submit-btn")
 };
@@ -37,6 +40,9 @@ class Books {
         this.bookArr.push(book);
         return book;
     }
+    changeReadStatus(book) {
+        this.bookArr.slice(this.bookArr.indexOf(book.read = true));
+    }
     get allBooks() {
         return this.bookArr;
     }
@@ -65,7 +71,7 @@ function renderBooks(book) {
     });
     readBtn.addEventListener("click", (i) => {
         if (bookArray[i] == readBtn[i]) {
-            bookArray.slice(bookArray.indexOf(book.read = true));
+            newBook.changeReadStatus(book);
             console.log(bookArray);
         }
     });
@@ -84,10 +90,35 @@ function submitBook(e) {
     const author = libraryDOM.authorInput.value;
     const pages = libraryDOM.pagesInput.value;
     const pushBooks = newBook.addBookToArray(title, author, pages);
-    libraryDOM.bookForm.style.visibility = "hidden";
-    renderBooks(pushBooks);
-    console.log(bookArray);
-    e.preventDefault();
+    if (libraryDOM.titleInput.validity.valueMissing) {
+        libraryDOM.titleError.style.display = "flex";
+        e.preventDefault();
+    } else { 
+        libraryDOM.titleError.style.display = "none"; 
+        e.preventDefault();
+    }
+    if (libraryDOM.authorInput.validity.valueMissing) {
+        libraryDOM.authorError.style.display = "flex";
+        e.preventDefault();
+    } else {
+        libraryDOM.authorError.style.display = "none";
+        e.preventDefault();
+    }
+    if (libraryDOM.pagesInput.validity.valueMissing) {
+        libraryDOM.pagesError.style.display = "flex";
+        e.preventDefault();
+    } else {
+        libraryDOM.pagesError.style.display = "none";
+        e.preventDefault();
+    }
+    if (libraryDOM.titleInput.validity.valid &&
+        libraryDOM.authorInput.validity.valid &&
+        libraryDOM.pagesInput.validity.valid) {
+        libraryDOM.bookForm.style.visibility = "hidden";
+        renderBooks(pushBooks);
+        console.log(bookArray);
+        e.preventDefault();
+    }
 }
 
 bookArray.forEach(renderBooks);

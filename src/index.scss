@@ -43,6 +43,25 @@ form {
     width: 500px;
     height: 500px;
     z-index: 1;
+    input[type="text"] {
+        background-color: white;
+    }
+    input:invalid {
+        background-color: rgb(253, 62, 62);
+    }
+    #title-error {
+        display: none;
+    }
+    #author-error {
+        display: none;
+    }
+    #pages-error {
+        display: none;
+    }
+    span {
+        color: red;
+        font-size: 12px
+    }
 }
 
 .book {
