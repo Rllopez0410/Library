@@ -89,7 +89,6 @@ function submitBook(e) {
     const title = libraryDOM.titleInput.value;
     const author = libraryDOM.authorInput.value;
     const pages = libraryDOM.pagesInput.value;
-    const pushBooks = newBook.addBookToArray(title, author, pages);
     if (libraryDOM.titleInput.validity.valueMissing) {
         libraryDOM.titleError.style.display = "flex";
         e.preventDefault();
@@ -114,6 +113,7 @@ function submitBook(e) {
     if (libraryDOM.titleInput.validity.valid &&
         libraryDOM.authorInput.validity.valid &&
         libraryDOM.pagesInput.validity.valid) {
+        const pushBooks = newBook.addBookToArray(title, author, pages);
         libraryDOM.bookForm.style.visibility = "hidden";
         renderBooks(pushBooks);
         console.log(bookArray);
