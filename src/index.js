@@ -33,15 +33,20 @@ class Book {
 
 class Books {
     constructor() {
-        this.bookArr = []; 
+        this.bookArr = JSON.parse(localStorage.getItem("bookArr")) || [];
     }
     addBookToArray(name, author, pages) {
         let book = new Book(name, author, pages);
         this.bookArr.push(book);
+        this.saveBooksToLocalStorage();
         return book;
     }
     changeReadStatus(book) {
-        this.bookArr.slice(this.bookArr.indexOf(book.read = true));
+        book.read = true;
+        this.saveBooksToLocalStorage();
+    }
+    saveBooksToLocalStorage() {
+        localStorage.setItem("bookArr", JSON.stringify(this.bookArr));
     }
     get allBooks() {
         return this.bookArr;
@@ -66,6 +71,7 @@ function renderBooks(book) {
             bookArray.splice(bookArray.indexOf(book), 1);
             newBookDiv.remove();
             dltBtn.remove();
+            newBook.saveBooksToLocalStorage();
             console.log(bookArray);
         }
     });
